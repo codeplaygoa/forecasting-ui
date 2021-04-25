@@ -1,0 +1,113 @@
+<!-- Container-fluid starts -->
+<div class="container-fluid">  
+    <h6 class="m-t-20">
+        <button type="button" class="float-right btn btn-outline-primary btn-xs-eplisis info-btn" [ngbPopover]="popContent" [popoverTitle]="popTitle" placement="left" triggers="mouseenter:mouseleave">
+            <i data-feather="info" ></i>
+        </button> 
+        {{retailerName}} URT Total RB and Segments Quarterwise
+    </h6>
+    <ng-template #popContent>                          
+          <p class="text-danger"> Note: </p>
+          <ul>
+            <li> - Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+            <li> - Quisque feugiat dolor et cursus tristique.</li>
+            <li> - Praesent ut tellus id metus feugiat eleifend vel a leo.</li>
+            <li> - Curabitur id libero vitae ipsum pulvinar lacinia mollis eget tellus.</li>
+            <li> - Proin nec risus et odio fermentum hendrerit sed id ligula.</li>
+            <li> - Nulla dapibus magna vel pulvinar tempus.</li>
+          </ul>
+    </ng-template>
+    <ng-template #popTitle> {{retailerName}} URT Total RB and Segments Quarterwise</ng-template>      
+    <hr/>
+    <div class="row">
+        <div class="col-sm-6 col-xl-6"> 
+            <figure>
+                <figcaption>Data for {{currentYear}}.</figcaption>
+                <ngx-datatable class="material fullscreen"  [headerHeight]="30" [columnMode]="'force'" [rowHeight]="20" [swapColumns]="false" [scrollbarV]="false" [virtualization]="false" [scrollbarH]="false" [rows]="ppgContributionsCurrentYear">
+                    <ngx-datatable-column name="SEGMENTS" prop="ppg_name" [cellClass]="bgsuccess"></ngx-datatable-column>
+                    <ngx-datatable-column name="Q1" prop="q1" ></ngx-datatable-column>
+                    <ngx-datatable-column name="Q2" prop="q2"></ngx-datatable-column>
+                    <ngx-datatable-column name="Q3" prop="q3" ></ngx-datatable-column>
+                    <ngx-datatable-column name="Q4" prop="q4" ></ngx-datatable-column>
+                    <ngx-datatable-column name="FY {{currentYear}}" prop="fy" [cellClass]="bgwarning" ></ngx-datatable-column>
+                </ngx-datatable>
+            </figure>
+        </div> 
+        <div class="col-sm-6 col-xl-6">            
+             <figure>
+                 <figcaption>Data for {{nextYear}}.</figcaption>
+                 <ngx-datatable class="material fullscreen"  [headerHeight]="30" [columnMode]="'force'" [rowHeight]="20" [swapColumns]="false" [scrollbarV]="false" [virtualization]="false" [scrollbarH]="false" [rows]="ppgContributionsNextYear">
+                    <ngx-datatable-column name="SEGMENTS" prop="ppg_name" [cellClass]="bgsuccess" ></ngx-datatable-column>
+                    <ngx-datatable-column name="Q1" prop="q1" ></ngx-datatable-column>
+                    <ngx-datatable-column name="Q2" prop="q2"></ngx-datatable-column>
+                    <ngx-datatable-column name="Q3" prop="q3" ></ngx-datatable-column>
+                    <ngx-datatable-column name="Q4" prop="q4" ></ngx-datatable-column>
+                    <ngx-datatable-column name="FY {{nextYear}}" prop="fy" [cellClass]="bgwarning" ></ngx-datatable-column>
+                </ngx-datatable>
+            </figure> 
+        </div> 
+    </div> 
+    <h6 class="m-t-20">
+        <button type="button" class="float-right btn btn-outline-primary btn-xs-eplisis info-btn" [ngbPopover]="popContent" [popoverTitle]="popTitle" placement="left" triggers="mouseenter:mouseleave">
+            <i data-feather="info" ></i>
+        </button> 
+        {{retailerName}} URT Total RB and Segments Monthwise
+    </h6>
+    <ng-template #popContent>                          
+          <p class="text-danger"> Note: </p>
+          <ul>
+            <li> - Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+            <li> - Quisque feugiat dolor et cursus tristique.</li>
+            <li> - Praesent ut tellus id metus feugiat eleifend vel a leo.</li>
+            <li> - Curabitur id libero vitae ipsum pulvinar lacinia mollis eget tellus.</li>
+            <li> - Proin nec risus et odio fermentum hendrerit sed id ligula.</li>
+            <li> - Nulla dapibus magna vel pulvinar tempus.</li>
+          </ul>
+    </ng-template>
+    <ng-template #popTitle> {{retailerName}} URT Total RB and Segments Monthwise</ng-template>      
+    <hr/>
+    <div class="row">
+        <div class="col-sm-12 col-xl-12"> 
+            <figure>
+                <figcaption>Data for {{nextYear}}.</figcaption>
+                <ngx-datatable class="material fullscreen"  [headerHeight]="30" [columnMode]="'force'" [rowHeight]="20" [swapColumns]="false" [scrollbarV]="false" [virtualization]="false" [scrollbarH]="false" [rows]="ppgContributionsNextYearWise">
+                    <ngx-datatable-column name="SEGMENTS" prop="ppg_name" [cellClass]="bgsuccess"></ngx-datatable-column>
+                    <ngx-datatable-column name="JAN" prop="jan" ></ngx-datatable-column>
+                    <ngx-datatable-column name="FEB" prop="feb"></ngx-datatable-column>
+                    <ngx-datatable-column name="MAR" prop="mar" ></ngx-datatable-column>
+                    <ngx-datatable-column name="APR" prop="apr" ></ngx-datatable-column>
+                    <ngx-datatable-column name="MAY" prop="may" ></ngx-datatable-column>
+                    <ngx-datatable-column name="JUN" prop="jun"></ngx-datatable-column>
+                    <ngx-datatable-column name="JUL" prop="jul" ></ngx-datatable-column>
+                    <ngx-datatable-column name="AUG" prop="aug" ></ngx-datatable-column>
+                    <ngx-datatable-column name="SEP" prop="sep" ></ngx-datatable-column>
+                    <ngx-datatable-column name="OCT" prop="oct"></ngx-datatable-column>
+                    <ngx-datatable-column name="NOV" prop="nov" ></ngx-datatable-column>
+                    <ngx-datatable-column name="DEC" prop="dec" ></ngx-datatable-column>
+                    <ngx-datatable-column name="FY {{nextYear}}" prop="fy" [cellClass]="bgwarning" ></ngx-datatable-column>
+                </ngx-datatable>
+            </figure>
+        </div> 
+        <div class="col-sm-12 col-xl-12"> 
+            <figure>
+                <figcaption>Data for {{currentYear}}.</figcaption>
+                <ngx-datatable class="material fullscreen"  [headerHeight]="30" [columnMode]="'force'" [rowHeight]="20" [swapColumns]="false" [scrollbarV]="false" [virtualization]="false" [scrollbarH]="false" [rows]="ppgContributionsCurrentYearWise">
+                    <ngx-datatable-column name="SEGMENTS" prop="ppg_name" [cellClass]="bgsuccess"></ngx-datatable-column>
+                    <ngx-datatable-column name="JAN" prop="jan" ></ngx-datatable-column>
+                    <ngx-datatable-column name="FEB" prop="feb"></ngx-datatable-column>
+                    <ngx-datatable-column name="MAR" prop="mar" ></ngx-datatable-column>
+                    <ngx-datatable-column name="APR" prop="apr" ></ngx-datatable-column>
+                    <ngx-datatable-column name="MAY" prop="may" ></ngx-datatable-column>
+                    <ngx-datatable-column name="JUN" prop="jun"></ngx-datatable-column>
+                    <ngx-datatable-column name="JUL" prop="jul" ></ngx-datatable-column>
+                    <ngx-datatable-column name="AUG" prop="aug" ></ngx-datatable-column>
+                    <ngx-datatable-column name="SEP" prop="sep" ></ngx-datatable-column>
+                    <ngx-datatable-column name="OCT" prop="oct"></ngx-datatable-column>
+                    <ngx-datatable-column name="NOV" prop="nov" ></ngx-datatable-column>
+                    <ngx-datatable-column name="DEC" prop="dec" ></ngx-datatable-column>
+                    <ngx-datatable-column name="FY {{currentYear}}" prop="fy" [cellClass]="bgwarning" ></ngx-datatable-column>
+                </ngx-datatable>
+            </figure>
+        </div>
+    </div> 
+</div>

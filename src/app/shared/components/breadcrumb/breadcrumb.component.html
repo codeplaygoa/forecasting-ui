@@ -1,0 +1,47 @@
+<div class="container-fluid">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="page-header-left">
+          <h3>{{title}}</h3>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="'/dashboard/default'">
+                <app-feather-icons [icon]="'home'"></app-feather-icons>
+              </a></li>
+            <li class="breadcrumb-item" *ngIf="breadcrumbs?.parentBreadcrumb">{{breadcrumbs?.parentBreadcrumb}}</li>
+            <li class="breadcrumb-item active" *ngIf="breadcrumbs?.childBreadcrumb">{{breadcrumbs?.childBreadcrumb}}
+            </li>
+          </ol>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <!--app-bookmark></app-bookmark-->
+      <div ngbDropdown class="d-inline-block float-right" placement="bottom">
+        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle >{{selectedAggregation}}</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button class="dropdown-item" (click)="changeAggregate('absolute_dollar')">Absolute $ MM</button>
+          <button class="dropdown-item" (click)="changeAggregate('percent_change')">% Change</button>
+        </div> 
+      </div>
+      <!--div ngbDropdown class="d-inline-block float-right m-r-20" placement="bottom">
+        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle >{{selectedPpg}}</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button  *ngFor="let ppg of ppgs; index as i; " class="dropdown-item" (click)="changePPG(ppg.name)">{{ppg.name}}</button>
+        </div>
+      </div--> 
+      <div ngbDropdown class="d-inline-block float-right m-r-20" placement="bottom">
+        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle >{{selectedYear}}</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button  *ngFor="let year of years; index as i; " class="dropdown-item" (click)="changeYear(year[0])">{{year[0]}}</button>
+        </div>
+      </div>      
+      <div ngbDropdown class="d-inline-block float-right m-r-20" placement="bottom">
+        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle >{{selectedRetailer}}</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button  *ngFor="let retailer of retailers; index as i; " class="dropdown-item" (click)="changeRetailer(retailer.retailer_id,retailer.retailer_name)">{{retailer.retailer_name}}</button>
+        </div>
+      </div>  
+      </div>
+    </div>
+  </div>
+</div>

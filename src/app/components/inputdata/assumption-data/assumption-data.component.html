@@ -1,0 +1,78 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12 col-xl-12">         
+          <!--ngb-tabset [justify]="currentJustify">
+              <ngb-tab>
+              <ng-template ngbTabTitle><b>Assumption Data</b></ng-template>
+              <ng-template ngbTabContent-->
+                <div class="row">
+                    <div class="col-sm-12 col-xl-8  custom-datatable">   
+                        <div class="card card-absolute">
+                            <div class="card-header bg-primary">
+                              <h5>Data for {{currentppg}}</h5>
+                            </div>
+                            <div class="card-body">
+                                <ngx-datatable class="material fullscreen fixed-header" [headerHeight]="50" [columnMode]="'force'"
+                                [footerHeight]="0" [rowHeight]="30" [swapColumns]="false" [scrollbarV]="false" [virtualization]="false" [scrollbarH]="true" [rows]="assumption">
+                                    <ngx-datatable-column name="Week From" prop="weekfrom" [frozenLeft]="true"></ngx-datatable-column>
+                                    <ngx-datatable-column name="Week To" prop="weekto" [frozenLeft]="true"></ngx-datatable-column>
+                                    <ngx-datatable-column name="Average Price" prop="avgprc"></ngx-datatable-column>
+                                    <ngx-datatable-column name="TDP" prop="tdp"></ngx-datatable-column>
+                                    <ngx-datatable-column name="Seasonal Base" prop="seasonalBase"></ngx-datatable-column>
+                                    <ngx-datatable-column name="Media Spend" prop="media"></ngx-datatable-column>
+                                    <ngx-datatable-column name="Dare AvgPrc" prop="dareAvgPrc"></ngx-datatable-column>
+                                    <ngx-datatable-column name="Leclerc AvgPrc" prop="leclercAvgPrc"></ngx-datatable-column>
+                                </ngx-datatable>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-xl-4">
+                        <div class="card">                              
+                            <div class="card-header">
+                              <h5>Upload Assumption Data For {{currentppg}}</h5>
+                            </div>
+                            <div class="card-body">
+                                <ng-template #popContent>
+                                  <code> Week From | Week To | Average Price |</code>
+                                  <br/>
+                                  <code> TDP | Seasonal Base |  Media Spend |</code>
+                                  <br/>
+                                  <code>Competitor 1 Average Price | Competitor 2 Average Price </code>
+                                  <hr>
+                                  <p class="text-danger"> Note: </p>
+                                  <ul>
+                                    <li> - Add competitor average price columns as <code>competitor actual name[SPACE]Average Price</code></li>
+                                    <li> - File must be in csv format</li>
+                                    <li> - Order of headers fields must be in the order mentioned above</li>
+                                  </ul>
+                              </ng-template>
+                              <ng-template #popTitle>Import File Structure</ng-template>
+                              <button type="button" class="btn btn-outline-primary btn-xs-eplisis m-b-20" [ngbPopover]="popContent"
+                                [popoverTitle]="popTitle" placement="left" triggers="mouseenter:mouseleave">
+                                Import File Structure
+                              </button> 
+                              <div class="dropzone dropzone-primary" [dropzone]="dropzoneconfig" (error)="onUploadError($event)"
+                                (success)="onUploadSuccess($event)">
+                                <div class="dz-message needsclick"> 
+                                  <i class="icon-cloud-up"></i>
+                                  <h6>Drop files here or click to upload.</h6>
+                                </div>
+                              </div>
+                                <button type="button" class="btn btn-outline-primary btn-xs-eplisis m-t-20 m-b-20" (click)="computeData()">
+                                Compute Analysis
+                              </button> 
+                            </div>
+                          </div>
+                    </div>
+                </div>
+              <!--/ng-template>
+            </ngb-tab>   
+            <ngb-tab title="Weekly data">
+              <ng-template ngbTabContent>
+               </ng-template> 
+            </ngb-tab>                     
+          </ngb-tabset-->          
+        </div>
+       
+  </div>  
+</div>

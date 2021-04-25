@@ -1,0 +1,39 @@
+.ngx-datatable{
+    &.material{
+        box-shadow:none;
+        .datatable-header{
+            .datatable-header-cell{
+                padding: 0.5rem 0.8rem;
+                font-size: 12px;
+                font-weight: 700;
+                text-align: center;
+            }            
+        } 
+        .datatable-body {
+            .datatable-body-row {
+                .datatable-body-cell{
+                    font-size: 12px;
+                    justify-content: center;
+                    
+                    &.left-align{
+                        justify-content: left;
+                    }
+                }
+            }            
+        }
+    }
+}
+
+hr{
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.info-btn{
+    padding: 0.1rem 0.3rem;
+    margin-bottom: 0px !important;
+    border: 0;
+    margin-top: -5px;
+    line-height: 1;
+}
+

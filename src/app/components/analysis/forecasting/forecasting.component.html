@@ -1,0 +1,225 @@
+<!-- Container-fluid starts -->
+<div class="container-fluid">  
+    
+    <h6>
+        <ng-template #content let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">URT Category Growth and RB Share</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-xl-6">
+                    <div class="card card-absolute">
+                        <div class="card-header bg-primary">
+                            <h5 class="text-center">Percent Growth & Share </h5>
+                        </div>
+                        <div class="card-body chart-block">
+                           <canvas baseChart class="chart" [datasets]="lineChartData" [labels]="lineChartLabels"
+                                [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
+                                [chartType]="lineChartType" (chartHover)="chartHovered($event)"
+                                (chartClick)="chartClicked($event)"></canvas>
+                        </div>
+                    </div>
+                </div> 
+                <div class="col-xl-6">
+                    <div class="card card-absolute">
+                        <div class="card-header bg-primary">
+                            <h5 class="text-center">RB Share Change</h5>
+                        </div>
+                        <div class="card-body chart-block">
+                            <canvas baseChart class="chart" [datasets]="qtrBarChartData" [labels]="qtrBarChartLabels"
+                                [options]="qtrBarChartOptions" [colors]="qtrBarChartColors" [legend]="qtrBarChartLegend"
+                                [chartType]="qtrBarChartType" (chartHover)="chartHovered($event)"
+                                (chartClick)="chartClicked($event)"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            </div>
+          </ng-template>
+        <button class="float-right btn btn-outline-primary info-btn" (click)="openGraph(content)">
+            <i data-feather="pie-chart" ></i>
+        </button>   
+        <button type="button" class="float-right btn btn-outline-primary btn-xs-eplisis info-btn" [ngbPopover]="popContent" [popoverTitle]="popTitle" placement="left" triggers="mouseenter:mouseleave">
+            <i data-feather="info" ></i>
+        </button> 
+        URT Category Growth and RB Share
+    </h6>
+    <ng-template #popContent>                          
+          <p class="text-danger"> Note: </p>
+          <ul>
+            <li> - Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+            <li> - Quisque feugiat dolor et cursus tristique.</li>
+            <li> - Praesent ut tellus id metus feugiat eleifend vel a leo.</li>
+            <li> - Curabitur id libero vitae ipsum pulvinar lacinia mollis eget tellus.</li>
+            <li> - Proin nec risus et odio fermentum hendrerit sed id ligula.</li>
+            <li> - Nulla dapibus magna vel pulvinar tempus.</li>
+          </ul>
+    </ng-template>
+    <ng-template #popTitle>URT Category Growth and RB Share</ng-template>      
+    <hr/>
+    <div class="row">
+        <div class="col-sm-6 col-xl-6"> 
+            <ngx-datatable class="material fullscreen"  [headerHeight]="30" [columnMode]="'force'" [rowHeight]="20" [swapColumns]="false" [scrollbarV]="false" [virtualization]="false" [scrollbarH]="false" [rows]="urtgrowth">  
+                <ngx-datatable-column name="URT Growth" prop="year" [cellClass]="bgsuccess"></ngx-datatable-column>
+                <ngx-datatable-column name="Q1" prop="q1" ></ngx-datatable-column>
+                <ngx-datatable-column name="Q2" prop="q2"></ngx-datatable-column>
+                <ngx-datatable-column name="Q3" prop="q3" ></ngx-datatable-column>
+                <ngx-datatable-column name="Q4" prop="q4" ></ngx-datatable-column>
+                <ngx-datatable-column name="FY" prop="fy" [cellClass]="bgwarning" ></ngx-datatable-column>
+            </ngx-datatable>
+        </div> 
+        <div class="col-sm-6 col-xl-6">            
+             <ngx-datatable class="material fullscreen"  [headerHeight]="30" [columnMode]="'force'" [rowHeight]="20" [swapColumns]="false" [scrollbarV]="false" [virtualization]="false" [scrollbarH]="false" [rows]="rbgrowth">
+                <ngx-datatable-column name="RB Growth" prop="year" [cellClass]="bgsuccess" ></ngx-datatable-column>
+                <ngx-datatable-column name="Q1" prop="q1" ></ngx-datatable-column>
+                <ngx-datatable-column name="Q2" prop="q2"></ngx-datatable-column>
+                <ngx-datatable-column name="Q3" prop="q3" ></ngx-datatable-column>
+                <ngx-datatable-column name="Q4" prop="q4" ></ngx-datatable-column>
+                <ngx-datatable-column name="FY" prop="fy" [cellClass]="bgwarning" ></ngx-datatable-column>
+            </ngx-datatable>
+        </div>  
+        <div class="col-sm-6 col-xl-6"> 
+            <ngx-datatable class="material fullscreen"  [headerHeight]="30" [columnMode]="'force'" [rowHeight]="20" [swapColumns]="false" [scrollbarV]="false" [virtualization]="false" [scrollbarH]="false" [rows]="rbshare">
+                <ngx-datatable-column name="RB Share" prop="year" [cellClass]="bgsuccess"></ngx-datatable-column>
+                <ngx-datatable-column name="Q1" prop="q1" ></ngx-datatable-column>
+                <ngx-datatable-column name="Q2" prop="q2"></ngx-datatable-column>
+                <ngx-datatable-column name="Q3" prop="q3" ></ngx-datatable-column>
+                <ngx-datatable-column name="Q4" prop="q4" ></ngx-datatable-column>
+                <ngx-datatable-column name="FY" prop="fy" [cellClass]="bgwarning" ></ngx-datatable-column>
+            </ngx-datatable>
+        </div> 
+        <div class="col-sm-6 col-xl-6">            
+             <ngx-datatable class="material fullscreen"  [headerHeight]="30" [columnMode]="'force'" [rowHeight]="20" [swapColumns]="false" [scrollbarV]="false" [virtualization]="false" [scrollbarH]="false" [rows]="rbsharechange">
+                <ngx-datatable-column name="RB Share Change" prop="year" [cellClass]="bgsuccess" ></ngx-datatable-column>
+                <ngx-datatable-column name="Q1" prop="q1" ></ngx-datatable-column>
+                <ngx-datatable-column name="Q2" prop="q2"></ngx-datatable-column>
+                <ngx-datatable-column name="Q3" prop="q3" ></ngx-datatable-column>
+                <ngx-datatable-column name="Q4" prop="q4" ></ngx-datatable-column>
+                <ngx-datatable-column name="FY" prop="fy" [cellClass]="bgwarning" ></ngx-datatable-column>
+            </ngx-datatable>
+        </div>  
+        
+    </div>
+    <h6 class="m-t-20">
+        <button type="button" class="float-right btn btn-outline-primary btn-xs-eplisis info-btn" [ngbPopover]="popContent" [popoverTitle]="popTitle" placement="left" triggers="mouseenter:mouseleave">
+            <i data-feather="info" ></i>
+        </button> 
+        XAOC URT Total RB and Segments
+    </h6>
+    <ng-template #popContent>                          
+          <p class="text-danger"> Note: </p>
+          <ul>
+            <li> - Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+            <li> - Quisque feugiat dolor et cursus tristique.</li>
+            <li> - Praesent ut tellus id metus feugiat eleifend vel a leo.</li>
+            <li> - Curabitur id libero vitae ipsum pulvinar lacinia mollis eget tellus.</li>
+            <li> - Proin nec risus et odio fermentum hendrerit sed id ligula.</li>
+            <li> - Nulla dapibus magna vel pulvinar tempus.</li>
+          </ul>
+    </ng-template>
+    <ng-template #popTitle>XAOC URT Total RB</ng-template>      
+    <hr/>
+    <div class="row">
+        <div class="col-sm-5 col-xl-5"> 
+            <figure>
+                <figcaption>Data for {{currentYear}}.</figcaption>
+                <ngx-datatable class="material fullscreen"  [headerHeight]="30" [columnMode]="'force'" [rowHeight]="20" [swapColumns]="false" [scrollbarV]="false" [virtualization]="false" [scrollbarH]="false" [rows]="ppgContributionsCurrentYear">
+                    <ngx-datatable-column name="SEGMENTS" prop="ppg_name" [cellClass]="bgsuccess"></ngx-datatable-column>
+                    <ngx-datatable-column name="Q1" prop="q1" ></ngx-datatable-column>
+                    <ngx-datatable-column name="Q2" prop="q2"></ngx-datatable-column>
+                    <ngx-datatable-column name="Q3" prop="q3" ></ngx-datatable-column>
+                    <ngx-datatable-column name="Q4" prop="q4" ></ngx-datatable-column>
+                    <ngx-datatable-column name="FY {{currentYear}}" prop="fy" [cellClass]="bgwarning" ></ngx-datatable-column>
+                </ngx-datatable>
+            </figure>
+        </div> 
+        <div class="col-sm-5 col-xl-5">            
+             <figure>
+                 <figcaption>Data for {{nextYear}}.</figcaption>
+                 <ngx-datatable class="material fullscreen"  [headerHeight]="30" [columnMode]="'force'" [rowHeight]="20" [swapColumns]="false" [scrollbarV]="false" [virtualization]="false" [scrollbarH]="false" [rows]="ppgContributionsNextYear">
+                    <ngx-datatable-column name="SEGMENTS" prop="ppg_name" [cellClass]="bgsuccess" ></ngx-datatable-column>
+                    <ngx-datatable-column name="Q1" prop="q1" ></ngx-datatable-column>
+                    <ngx-datatable-column name="Q2" prop="q2"></ngx-datatable-column>
+                    <ngx-datatable-column name="Q3" prop="q3" ></ngx-datatable-column>
+                    <ngx-datatable-column name="Q4" prop="q4" ></ngx-datatable-column>
+                    <ngx-datatable-column name="FY {{nextYear}}" prop="fy" [cellClass]="bgwarning" ></ngx-datatable-column>
+                </ngx-datatable>
+            </figure> 
+        </div>  
+        <div class="col-sm-2 col-xl-2">
+            <figure>                    
+                <figcaption>Data for {{nextYear}} vs {{previousYear}}.</figcaption>
+                <ngx-datatable class="material fullscreen"  [headerHeight]="30" [columnMode]="'force'" 
+                [footerHeight]="0" [rowHeight]="20" [swapColumns]="false" [scrollbarV]="false" [virtualization]="false" [scrollbarH]="false" [rows]="ppgContributionsCompare">
+                    <ngx-datatable-column name="SEGMENTS" prop="ppg_name" [cellClass]="bgsuccess"></ngx-datatable-column>                        
+                    <ngx-datatable-column name="FY {{nextYear}} vs {{previousYear}}" prop="fy" [cellClass]="bgwarning" ></ngx-datatable-column>
+                </ngx-datatable>
+            </figure>
+        </div> 
+    </div> 
+    <h6>
+        <button type="button" class="float-right btn btn-outline-primary btn-xs-eplisis info-btn" [ngbPopover]="popContent1" [popoverTitle]="popTitle1" placement="left" triggers="mouseenter:mouseleave">
+            <i data-feather="info" ></i>
+        </button> 
+        Retailer Forecast: RB URT
+    </h6>
+    <ng-template #popContent1>                          
+          <p class="text-danger"> Note: </p>
+          <ul>
+            <li> - Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+            <li> - Quisque feugiat dolor et cursus tristique.</li>
+            <li> - Praesent ut tellus id metus feugiat eleifend vel a leo.</li>
+            <li> - Curabitur id libero vitae ipsum pulvinar lacinia mollis eget tellus.</li>
+            <li> - Proin nec risus et odio fermentum hendrerit sed id ligula.</li>
+            <li> - Nulla dapibus magna vel pulvinar tempus.</li>
+          </ul>
+      </ng-template>
+      <ng-template #popTitle1>Retailer Forecast: RB URT</ng-template>
+      
+    <hr/>
+    <div class="row">
+        <div class="col-sm-5 col-xl-5">
+            <figure> 
+                <figcaption>Data for {{currentYear}}.</figcaption>
+                <ngx-datatable class="material fullscreen"  [headerHeight]="30" [columnMode]="'force'" 
+                [footerHeight]="0" [rowHeight]="20" [swapColumns]="false" [scrollbarV]="false" [virtualization]="false" [scrollbarH]="false" [rows]="retailerContributionsCurrentYear">
+                    <ngx-datatable-column name="RETAILERS" prop="retailer_name" [cellClass]="bgsuccess"></ngx-datatable-column>
+                    <ngx-datatable-column name="Q1" prop="q1" ></ngx-datatable-column>
+                    <ngx-datatable-column name="Q2" prop="q2"></ngx-datatable-column>
+                    <ngx-datatable-column name="Q3" prop="q3" ></ngx-datatable-column>
+                    <ngx-datatable-column name="Q4" prop="q4" ></ngx-datatable-column>
+                    <ngx-datatable-column name="FY {{currentYear}}" prop="fy" [cellClass]="bgwarning" ></ngx-datatable-column>
+                </ngx-datatable>
+            </figure>
+        </div> 
+        <div class="col-sm-5 col-xl-5"> 
+            <figure> 
+                <figcaption>Data for {{nextYear}}.</figcaption>
+                <ngx-datatable class="material fullscreen"  [headerHeight]="30" [columnMode]="'force'" 
+                [footerHeight]="0" [rowHeight]="20" [swapColumns]="false" [scrollbarV]="false" [virtualization]="false" [scrollbarH]="false" [rows]="retailerContributionsNextYear">
+                    <ngx-datatable-column name="RETAILERS" prop="retailer_name" [cellClass]="bgsuccess" ></ngx-datatable-column>
+                    <ngx-datatable-column name="Q1" prop="q1" ></ngx-datatable-column>
+                    <ngx-datatable-column name="Q2" prop="q2"></ngx-datatable-column>
+                    <ngx-datatable-column name="Q3" prop="q3" ></ngx-datatable-column>
+                    <ngx-datatable-column name="Q4" prop="q4" ></ngx-datatable-column>
+                    <ngx-datatable-column name="FY {{nextYear}}" prop="fy" [cellClass]="bgwarning" ></ngx-datatable-column>
+                </ngx-datatable>
+            </figure>
+        </div>
+        <div class="col-sm-2 col-xl-2">
+            <figure>                    
+                <figcaption>Data for {{nextYear}} vs {{previousYear}}.</figcaption>
+                <ngx-datatable class="material fullscreen"  [headerHeight]="30" [columnMode]="'force'" 
+                [footerHeight]="0" [rowHeight]="20" [swapColumns]="false" [scrollbarV]="false" [virtualization]="false" [scrollbarH]="false" [rows]="retailerContributionsCompare">
+                    <ngx-datatable-column name="SEGMENTS" prop="retailer_name" [cellClass]="bgsuccess"></ngx-datatable-column>                        
+                    <ngx-datatable-column name="FY {{nextYear}} vs {{previousYear}}" prop="fy" [cellClass]="bgwarning" ></ngx-datatable-column>
+                </ngx-datatable>
+            </figure>
+        </div>
+    </div>      
+</div>
+<!-- Container-fluid Ends -->

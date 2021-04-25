@@ -1,0 +1,34 @@
+<div class="container-fluid">  
+    <div class="row">
+        <div class="col-sm-12 col-xl-6"> 
+            <div class="card card-absolute">
+                <div class="card-header bg-primary">
+                    <h5> JULY 2020 {{currentppg}} Actuals</h5>
+                </div>
+                <div class="card-body">
+                   <ngx-datatable class="material fullscreen"  [headerHeight]="50" [columnMode]="'force'" 
+                    [footerHeight]="0" [rowHeight]="30" [swapColumns]="false" [scrollbarV]="false" [virtualization]="false" [scrollbarH]="false" [rows]="actuals">
+                        <ngx-datatable-column name="Drivers" prop="drivers" ></ngx-datatable-column>
+                        <ngx-datatable-column name="$ Cons." prop="july2020actcontributiondollar"></ngx-datatable-column>
+                        <ngx-datatable-column name="Cont. %" prop="july2020actcontributionpct"></ngx-datatable-column>
+                    </ngx-datatable> 
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-6"> 
+            <div class="card card-absolute">
+                <div class="card-header bg-primary">
+                    <h5> JULY 2020 {{currentppg}} Forecast</h5>
+                </div>
+                <div class="card-body">
+                   <ngx-datatable class="material fullscreen"  [headerHeight]="50" [columnMode]="'force'" 
+                    [footerHeight]="0" [rowHeight]="30" [swapColumns]="false" [scrollbarV]="false" [virtualization]="false" [scrollbarH]="false" [rows]="forecast">
+                        <ngx-datatable-column name="Drivers" prop="drivers" ></ngx-datatable-column>
+                        <ngx-datatable-column name="$ Cons." prop="july2020fccontributiondollar"></ngx-datatable-column>
+                        <ngx-datatable-column name="Cont. %" prop="july2020fccontributionpct"></ngx-datatable-column>
+                    </ngx-datatable> 
+                </div>
+            </div>
+        </div>    
+    </div>
+</div>
