@@ -82,9 +82,10 @@ export class HeaderComponent implements OnInit {
 
       const currentItem:CategoryPPG = {
          category:match[0].category_id,
+         categoryname:match[0].category_name,
          year:'',
          aggregation:'',
-         retailer:null
+        /* retailer:null*/
       };
 
       this.categoryService.updateItem(currentItem);
@@ -149,9 +150,10 @@ export class HeaderComponent implements OnInit {
             this.selectedCategory = this.categories[0].category_name
               const currentItem:CategoryPPG = {
                  category:this.categories[0].category_id,
+                 categoryname:this.categories[0].category_name,
                  year:'',
                  aggregation:'',
-                 retailer:null
+                 /*retailer:null*/
                    
             };
              

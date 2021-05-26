@@ -3,9 +3,10 @@ import { Observable, BehaviorSubject } from 'rxjs';
 
 export interface CategoryPPG {
     category: string;
+    categoryname: string;
     year: string;
     aggregation: string;
-    retailer: number;
+    /*retailer: number;*/
 }
 
 @Injectable({ 
@@ -18,17 +19,19 @@ export class CategoryService {
     
     _CATEGORY:CategoryPPG = {
         category:'', 
+        categoryname:'', 
         year: '',
         aggregation: '',
-        retailer: null
+        /*retailer: null*/
     };
  
     updateItem(item: CategoryPPG) {
         
         this._CATEGORY.category = item.category;
+        this._CATEGORY.categoryname = item.categoryname;
         this._CATEGORY.year = item.year;  
         this._CATEGORY.aggregation = item.aggregation;  
-        this._CATEGORY.retailer = Number(item.retailer);  
+        /*this._CATEGORY.retailer = Number(item.retailer); */ 
         this.categorySubject.next(this._CATEGORY);
     }
  

@@ -4,6 +4,8 @@ import { CategoryService, CategoryPPG } from '../../../shared/services/category.
 import * as chartData from '../../../shared/data/chart/chartjs';
 import { Subscription } from 'rxjs';
 import { RestApiService } from "../../../shared/services/rest-api.service";
+import { Workbook } from 'exceljs';
+import * as fs from 'file-saver';
 
 @Component({
   selector: 'app-forecasting',
@@ -48,7 +50,7 @@ export class ForecastingComponent implements OnInit {
     public rbsharechange;
     public bgsuccess = "bg-success left-align";
     public bgwarning = "bg-secondary";
-    subscription: Subscription;    
+    subscription: Subscription;  
     
   constructor(private restApi: RestApiService, private categoryService: CategoryService, config: NgbModalConfig, private modalService: NgbModal) {  
       
@@ -146,15 +148,15 @@ export class ForecastingComponent implements OnInit {
               
         this.categoryService.getCategory().subscribe(currentCategory => {         
             if (currentCategory) { 
-                
+                (<HTMLButtonElement>document.getElementById("retailerDropDown")).textContent = "Select Retailer"
                 this.currentCategory = currentCategory  
                 this.currentYear = this.currentCategory.year - 1
                 this.previousYear = this.currentCategory.year - 2
                 this.nextYear = this.currentCategory.year
-                if(this.currentCategory.hasOwnProperty('category') && this.currentCategory.hasOwnProperty('year') && this.currentCategory.hasOwnProperty('aggregation') && this.currentCategory.hasOwnProperty('retailer')){                    
+                if(this.currentCategory.hasOwnProperty('category') && this.currentCategory.hasOwnProperty('year') && this.currentCategory.hasOwnProperty('aggregation') ){                    
                    if(this.currentCategory.category!="" && this.currentCategory.year!="" && this.currentCategory.aggregation !="" ){ 
-                       console.log(this.currentCategory)
-                       console.log("Category : " + this.currentCategory.category + "  ,  Year : " + this.currentCategory.year + "  ,    Aggregation : " + this.currentCategory.aggregation )
+                       //console.log(this.currentCategory)
+                      // console.log("Category : " + this.currentCategory.category + "  ,  Year : " + this.currentCategory.year + "  ,    Aggregation : " + this.currentCategory.aggregation )
                        this.restApi.getRetailerRBData(this.currentCategory.category,this.currentCategory.year,this.currentCategory.aggregation,'quarterwise').subscribe((data: {}) => {
                             var retailerContributionsCurrentYear = data[this.currentCategory.year - 1]
                             this.retailerContributionsCurrentYear = retailerContributionsCurrentYear   
@@ -253,16 +255,16 @@ export class ForecastingComponent implements OnInit {
                                 this.rbshare = rbshare
                                 
                                 var rbsharechange = []                               
-                                      
-                                rbsharechange.push({'year':this.rbgrowth[0].year,'q1':((this.rbgrowth[0].q1_ds/this.urtgrowth[0].q1_ds)-(this.rbgrowthprevious[0].q1_ds/this.urtgrowthprevious[0].q1_ds)).toFixed(2),'q2':((this.rbgrowth[0].q2_ds/this.urtgrowth[0].q2_ds)-(this.rbgrowthprevious[0].q2_ds/this.urtgrowthprevious[0].q2_ds)).toFixed(2),'q3':((this.rbgrowth[0].q3_ds/this.urtgrowth[0].q3_ds)-(this.rbgrowthprevious[0].q3_ds/this.urtgrowthprevious[0].q3_ds)).toFixed(2),'q4':((this.rbgrowth[0].q4_ds/this.urtgrowth[0].q4_ds)-(this.rbgrowthprevious[0].q4_ds/this.urtgrowthprevious[0].q4_ds)).toFixed(2),'fy':((this.rbgrowth[0].fy_ds/this.urtgrowth[0].fy_ds)-(this.rbgrowthprevious[0].fy_ds/this.urtgrowthprevious[0].fy_ds)).toFixed(2)})
+                                     
+                                rbsharechange.push({'year':this.rbgrowth[0].year,'q1':( ((this.rbgrowth[0].q1_ds/this.urtgrowth[0].q1_ds)-(this.rbgrowth[1].q1_ds/this.urtgrowth[1].q1_ds)) * 100).toFixed(2),'q2':( ((this.rbgrowth[0].q2_ds/this.urtgrowth[0].q2_ds)-(this.rbgrowth[1].q2_ds/this.urtgrowth[1].q2_ds)) * 100).toFixed(2),'q3':( ((this.rbgrowth[0].q3_ds/this.urtgrowth[0].q3_ds)-(this.rbgrowth[1].q3_ds/this.urtgrowth[1].q3_ds)) * 100).toFixed(2),'q4':( ((this.rbgrowth[0].q4_ds/this.urtgrowth[0].q4_ds)-(this.rbgrowth[1].q4_ds/this.urtgrowth[1].q4_ds)) * 100 ).toFixed(2),'fy':( ((this.rbgrowth[0].fy_ds/this.urtgrowth[0].fy_ds)-(this.rbgrowth[1].fy_ds/this.urtgrowth[1].fy_ds)) * 100 ).toFixed(2)})
                                        
-                                rbsharechange.push({'year':this.rbgrowth[1].year,'q1':((this.rbgrowth[1].q1_ds/this.urtgrowth[1].q1_ds)-(this.rbgrowth[0].q1_ds/this.urtgrowth[0].q1_ds)).toFixed(2),'q2':((this.rbgrowth[1].q2_ds/this.urtgrowth[1].q2_ds)-(this.rbgrowth[0].q2_ds/this.urtgrowth[0].q2_ds)).toFixed(2),'q3':((this.rbgrowth[1].q3_ds/this.urtgrowth[1].q3_ds)-(this.rbgrowth[0].q3_ds/this.urtgrowth[0].q3_ds)).toFixed(2),'q4':((this.rbgrowth[1].q4_ds/this.urtgrowth[1].q4_ds)-(this.rbgrowth[0].q4_ds/this.urtgrowth[0].q4_ds)).toFixed(2),'fy':((this.rbgrowth[1].fy_ds/this.urtgrowth[1].fy_ds)-(this.rbgrowth[0].fy_ds/this.urtgrowth[0].fy_ds)).toFixed(2)})
+                                rbsharechange.push({'year':this.rbgrowth[1].year,'q1':(((this.rbgrowth[1].q1_ds/this.urtgrowth[1].q1_ds)-(this.rbgrowthprevious[0].q1_ds/this.urtgrowthprevious[0].q1_ds)) * 100).toFixed(2),'q2':( ((this.rbgrowth[1].q2_ds/this.urtgrowth[1].q2_ds)-(this.rbgrowthprevious[0].q2_ds/this.urtgrowthprevious[0].q2_ds)) * 100).toFixed(2),'q3':( ((this.rbgrowth[1].q3_ds/this.urtgrowth[1].q3_ds)-(this.rbgrowthprevious[0].q3_ds/this.urtgrowthprevious[0].q3_ds)) * 100).toFixed(2),'q4':( ((this.rbgrowth[1].q4_ds/this.urtgrowth[1].q4_ds)-(this.rbgrowthprevious[0].q4_ds/this.urtgrowthprevious[0].q4_ds)) * 100).toFixed(2),'fy':( ((this.rbgrowth[1].fy_ds/this.urtgrowth[1].fy_ds)-(this.rbgrowthprevious[0].fy_ds/this.urtgrowthprevious[0].fy_ds)) * 100).toFixed(2)})
                                 
                                 this.rbsharechange = rbsharechange
                                 
                             })
                         })
-                        
+                         
                        
                                                                                                                                     
                     }
@@ -284,4 +286,308 @@ export class ForecastingComponent implements OnInit {
   openGraph(content) {
     this.modalService.open(content, {   size: 'xl', centered: true, backdropClass: 'light-blue-backdrop' });
   }
+
+    downloadCsv(){
+        
+        let workbook = new Workbook();
+        let worksheet = workbook.addWorksheet('Forecasting Dashboard for '+this.nextYear);
+        let i = 1;
+        let titleRow = worksheet.addRow([this.currentCategory.categoryname+' Category Growth and RB Share']);
+        i++;
+        titleRow.font = {  bold: true }
+        worksheet.mergeCells('A1:M1');
+        worksheet.addRow([]);
+        i++;
+        let tableheaderRow = worksheet.addRow(['URT Growth','Q1','Q2','Q3','Q4','FY','','RB Growth','Q1','Q2','Q3','Q4','FY']);
+        tableheaderRow.font = {  bold: true }
+        tableheaderRow.eachCell((cell, number) => {
+          cell.fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor:{argb:'43FFFFFF'},
+            bgColor:{argb:'43FFFFFF'}
+          }
+          cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } }
+        })
+        worksheet.getCell("G3").border = { top: { style: 'thin' ,color: {argb:'FFFFFFFF'}}, bottom: { style: 'thin' ,color: {argb:'FFFFFFFF'}} }
+        worksheet.getCell("G3").fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FFFFFFFF' },
+            bgColor: { argb: 'FFFFFFFF' }
+          }
+        i++;
+        let Row;
+        this.urtgrowth.forEach((element, index) => {
+            
+            Row = worksheet.addRow([this.urtgrowth[index].year,this.urtgrowth[index].q1,this.urtgrowth[index].q2,this.urtgrowth[index].q3,this.urtgrowth[index].q4,this.urtgrowth[index].fy,'',this.rbgrowth[index].year,this.rbgrowth[index].q1,this.rbgrowth[index].q2,this.rbgrowth[index].q3,this.rbgrowth[index].q4,this.rbgrowth[index].fy]);
+
+            Row.eachCell((cell, number) => {
+              cell.fill = {
+                type: 'pattern',
+                pattern: 'solid',
+                fgColor:{argb:'43FFFFFF'},
+                bgColor:{argb:'43FFFFFF'}
+              }
+              cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } }
+            })
+            worksheet.getCell("G"+i).border = { top: { style: 'thin' ,color: {argb:'FFFFFFFF'}}, bottom: { style: 'thin' ,color: {argb:'FFFFFFFF'}} }
+            worksheet.getCell("G"+i).fill = {
+                type: 'pattern',
+                pattern: 'solid',
+                fgColor: { argb: 'FFFFFFFF' },
+                bgColor: { argb: 'FFFFFFFF' }
+              }
+            i++;    
+        } );      
+        
+        //rb share and rb share change
+        worksheet.addRow([]);
+        i++;
+        tableheaderRow = worksheet.addRow(['RB Share','Q1','Q2','Q3','Q4','FY','','RB Share Change','Q1','Q2','Q3','Q4','FY']);
+        
+        tableheaderRow.font = {  bold: true }
+        tableheaderRow.eachCell((cell, number) => {
+          cell.fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor:{argb:'43FFFFFF'},
+            bgColor:{argb:'43FFFFFF'}
+          }
+          cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } }
+        })
+        worksheet.getCell("G"+i).border = { top: { style: 'thin' ,color: {argb:'FFFFFFFF'}}, bottom: { style: 'thin' ,color: {argb:'FFFFFFFF'}} }
+        worksheet.getCell("G"+i).fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FFFFFFFF' },
+            bgColor: { argb: 'FFFFFFFF' }
+          }
+        i++;
+        
+        this.rbshare.forEach((element, index) => {
+            Row = worksheet.addRow([this.rbshare[index].year,this.rbshare[index].q1,this.rbshare[index].q2,this.rbshare[index].q3,this.rbshare[index].q4,this.rbshare[index].fy,'',this.rbsharechange[index].year,this.rbsharechange[index].q1,this.rbsharechange[index].q2,this.rbsharechange[index].q3,this.rbsharechange[index].q4,this.rbsharechange[index].fy]);
+
+            Row.eachCell((cell, number) => {
+              cell.fill = {
+                type: 'pattern',
+                pattern: 'solid',
+                fgColor:{argb:'43FFFFFF'},
+                bgColor:{argb:'43FFFFFF'}
+              }
+              cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } }
+            })
+            worksheet.getCell("G"+i).border = { top: { style: 'thin' ,color: {argb:'FFFFFFFF'}}, bottom: { style: 'thin' ,color: {argb:'FFFFFFFF'}} }
+            worksheet.getCell("G"+i).fill = {
+                type: 'pattern',
+                pattern: 'solid',
+                fgColor: { argb: 'FFFFFFFF' },
+                bgColor: { argb: 'FFFFFFFF' }
+              }
+            i++;
+        });
+        worksheet.addRow([]);
+        i++;
+        titleRow = worksheet.addRow(['XAOC '+this.currentCategory.categoryname+' Total RB and Segments ']);
+        
+        titleRow.font = {  bold: true }
+        worksheet.mergeCells('A'+i+':P'+i);
+        i++;       
+        worksheet.addRow([]);
+        i++;
+        tableheaderRow = worksheet.addRow(['Data for '+this.currentYear,'','','','','','','Data for '+this.nextYear,'','','','','','','Data for '+this.nextYear+' vs '+this.previousYear,'']);
+        worksheet.mergeCells('A'+i+':F'+i);
+        worksheet.mergeCells('H'+i+':M'+i);
+        worksheet.mergeCells('O'+i+':P'+i);
+        tableheaderRow.font = {  bold: true }
+        tableheaderRow.eachCell((cell, number) => {
+          cell.fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor:{argb:'43FFFFFF'},
+            bgColor:{argb:'43FFFFFF'}
+          }
+          cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } }
+        })
+        worksheet.getCell("G"+i).border = { top: { style: 'thin' ,color: {argb:'FFFFFFFF'}}, bottom: { style: 'thin' ,color: {argb:'FFFFFFFF'}} }
+        worksheet.getCell("G"+i).fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FFFFFFFF' },
+            bgColor: { argb: 'FFFFFFFF' }
+          }
+        worksheet.getCell("N"+i).border = { top: { style: 'thin' ,color: {argb:'FFFFFFFF'}}, bottom: { style: 'thin' ,color: {argb:'FFFFFFFF'}} }
+        worksheet.getCell("N"+i).fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FFFFFFFF' },
+            bgColor: { argb: 'FFFFFFFF' }
+          }
+        i++;
+        
+        tableheaderRow = worksheet.addRow(['Segment','Q1','Q2','Q3','Q4','FY '+this.currentYear,'','Segment','Q1','Q2','Q3','Q4','FY '+this.nextYear,'','Segment','FY '+this.nextYear+' vs '+this.previousYear]);
+        
+        tableheaderRow.font = {  bold: true }
+        tableheaderRow.eachCell((cell, number) => {
+          cell.fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor:{argb:'43FFFFFF'},
+            bgColor:{argb:'43FFFFFF'}
+          }
+          cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } }
+        })
+        worksheet.getCell("G"+i).border = { top: { style: 'thin' ,color: {argb:'FFFFFFFF'}}, bottom: { style: 'thin' ,color: {argb:'FFFFFFFF'}} }
+        worksheet.getCell("G"+i).fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FFFFFFFF' },
+            bgColor: { argb: 'FFFFFFFF' }
+          }
+        worksheet.getCell("N"+i).border = { top: { style: 'thin' ,color: {argb:'FFFFFFFF'}}, bottom: { style: 'thin' ,color: {argb:'FFFFFFFF'}} }
+        worksheet.getCell("N"+i).fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FFFFFFFF' },
+            bgColor: { argb: 'FFFFFFFF' }
+          }
+        i++;
+        
+        
+        
+        
+        ////ppg
+        
+        this.ppgContributionsCurrentYear.forEach((element, index) => {
+            Row = worksheet.addRow([this.ppgContributionsCurrentYear[index].ppg_name,this.ppgContributionsCurrentYear[index].q1,this.ppgContributionsCurrentYear[index].q2,this.ppgContributionsCurrentYear[index].q3,this.ppgContributionsCurrentYear[index].q4,this.ppgContributionsCurrentYear[index].fy,'',this.ppgContributionsNextYear[index].ppg_name,this.ppgContributionsNextYear[index].q1,this.ppgContributionsNextYear[index].q2,this.ppgContributionsNextYear[index].q3,this.ppgContributionsNextYear[index].q4,this.ppgContributionsNextYear[index].fy,'',this.ppgContributionsCompare[index].ppg_name,this.ppgContributionsCompare[index].fy]);
+
+            Row.eachCell((cell, number) => {
+              cell.fill = {
+                type: 'pattern',
+                pattern: 'solid',
+                fgColor:{argb:'43FFFFFF'},
+                bgColor:{argb:'43FFFFFF'}
+              }
+              cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } }
+            })
+            worksheet.getCell("G"+i).border = { top: { style: 'thin' ,color: {argb:'FFFFFFFF'}}, bottom: { style: 'thin' ,color: {argb:'FFFFFFFF'}} }
+            worksheet.getCell("G"+i).fill = {
+                type: 'pattern',
+                pattern: 'solid',
+                fgColor: { argb: 'FFFFFFFF' },
+                bgColor: { argb: 'FFFFFFFF' }
+              }
+            worksheet.getCell("N"+i).border = { top: { style: 'thin' ,color: {argb:'FFFFFFFF'}}, bottom: { style: 'thin' ,color: {argb:'FFFFFFFF'}} }
+            worksheet.getCell("N"+i).fill = {
+                type: 'pattern',
+                pattern: 'solid',
+                fgColor: { argb: 'FFFFFFFF' },
+                bgColor: { argb: 'FFFFFFFF' }
+              }
+            i++;
+        });
+        
+        
+        worksheet.addRow([]);
+        i++;
+        titleRow = worksheet.addRow(['Retailer Forecast: RB '+this.currentCategory.categoryname]);
+        
+        titleRow.font = {  bold: true }
+        worksheet.mergeCells('A'+i+':P'+i);
+        i++;       
+        worksheet.addRow([]);
+        i++;
+        tableheaderRow = worksheet.addRow(['Data for '+this.currentYear,'','','','','','','Data for '+this.nextYear,'','','','','','','Data for '+this.nextYear+' vs '+this.previousYear,'']);
+        worksheet.mergeCells('A'+i+':F'+i);
+        worksheet.mergeCells('H'+i+':M'+i);
+        worksheet.mergeCells('O'+i+':P'+i);
+        tableheaderRow.font = {  bold: true }
+        tableheaderRow.eachCell((cell, number) => {
+          cell.fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor:{argb:'43FFFFFF'},
+            bgColor:{argb:'43FFFFFF'}
+          }
+          cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } }
+        })
+        worksheet.getCell("G"+i).border = { top: { style: 'thin' ,color: {argb:'FFFFFFFF'}}, bottom: { style: 'thin' ,color: {argb:'FFFFFFFF'}} }
+        worksheet.getCell("G"+i).fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FFFFFFFF' },
+            bgColor: { argb: 'FFFFFFFF' }
+          }
+        worksheet.getCell("N"+i).border = { top: { style: 'thin' ,color: {argb:'FFFFFFFF'}}, bottom: { style: 'thin' ,color: {argb:'FFFFFFFF'}} }
+        worksheet.getCell("N"+i).fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FFFFFFFF' },
+            bgColor: { argb: 'FFFFFFFF' }
+          }
+        i++;
+        
+        tableheaderRow = worksheet.addRow(['Retailers','Q1','Q2','Q3','Q4','FY '+this.currentYear,'','Retailers','Q1','Q2','Q3','Q4','FY '+this.nextYear,'','Retailers','FY '+this.nextYear+' vs '+this.previousYear]);
+        
+        tableheaderRow.font = {  bold: true }
+        tableheaderRow.eachCell((cell, number) => {
+          cell.fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor:{argb:'43FFFFFF'},
+            bgColor:{argb:'43FFFFFF'}
+          }
+          cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } }
+        })
+        worksheet.getCell("G"+i).border = { top: { style: 'thin' ,color: {argb:'FFFFFFFF'}}, bottom: { style: 'thin' ,color: {argb:'FFFFFFFF'}} }
+        worksheet.getCell("G"+i).fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FFFFFFFF' },
+            bgColor: { argb: 'FFFFFFFF' }
+          }
+        worksheet.getCell("N"+i).border = { top: { style: 'thin' ,color: {argb:'FFFFFFFF'}}, bottom: { style: 'thin' ,color: {argb:'FFFFFFFF'}} }
+        worksheet.getCell("N"+i).fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FFFFFFFF' },
+            bgColor: { argb: 'FFFFFFFF' }
+          }
+        i++;
+        
+       ////retailer
+        this.retailerContributionsCurrentYear.forEach((element, index) => {
+            Row = worksheet.addRow([this.retailerContributionsCurrentYear[index].retailer_name,this.retailerContributionsCurrentYear[index].q1,this.retailerContributionsCurrentYear[index].q2,this.retailerContributionsCurrentYear[index].q3,this.retailerContributionsCurrentYear[index].q4,this.retailerContributionsCurrentYear[index].fy,'',this.retailerContributionsNextYear[index].retailer_name,this.retailerContributionsNextYear[index].q1,this.retailerContributionsNextYear[index].q2,this.retailerContributionsNextYear[index].q3,this.retailerContributionsNextYear[index].q4,this.retailerContributionsNextYear[index].fy,'',this.retailerContributionsCompare[index].retailer_name,this.retailerContributionsCompare[index].fy]);
+
+            Row.eachCell((cell, number) => {
+              cell.fill = {
+                type: 'pattern',
+                pattern: 'solid',
+                fgColor:{argb:'43FFFFFF'},
+                bgColor:{argb:'43FFFFFF'}
+              }
+              cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } }
+            })
+            worksheet.getCell("G"+i).border = { top: { style: 'thin' ,color: {argb:'FFFFFFFF'}}, bottom: { style: 'thin' ,color: {argb:'FFFFFFFF'}} }
+            worksheet.getCell("G"+i).fill = {
+                type: 'pattern',
+                pattern: 'solid',
+                fgColor: { argb: 'FFFFFFFF' },
+                bgColor: { argb: 'FFFFFFFF' }
+              }
+            worksheet.getCell("N"+i).border = { top: { style: 'thin' ,color: {argb:'FFFFFFFF'}}, bottom: { style: 'thin' ,color: {argb:'FFFFFFFF'}} }
+            worksheet.getCell("N"+i).fill = {
+                type: 'pattern',
+                pattern: 'solid',
+                fgColor: { argb: 'FFFFFFFF' },
+                bgColor: { argb: 'FFFFFFFF' }
+              }
+            i++;
+        });
+        
+        workbook.xlsx.writeBuffer().then((data) => {
+          let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+          fs.saveAs(blob, 'Forecasting Dashboard for '+this.nextYear+'.xlsx');
+        })
+    }
 }

@@ -1,0 +1,50 @@
+dropzone {
+    .dropzone{
+         box-shadow: none !important;
+    }
+    > .dropzone {       
+        &.dz-wrapper {
+            .dz-message {
+                border: 0px !important;
+                background-color: transparent !important;
+            }
+        }
+    }
+    
+}
+
+.status_items {
+    li {
+        border-bottom: 1px solid #d0cfcf;
+        padding: 1rem 0rem;
+        position: relative;
+        
+        span{
+            display:block;
+        }
+        .pulsating{
+            bottom: 0;
+            position: absolute;
+            right: 0;
+        }
+        
+        .aborted{
+            width: 42px;
+            margin-top: -11px;
+            margin-right: 14px;
+        }
+    }
+}
+
+
+.blink_me {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+

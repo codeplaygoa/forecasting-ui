@@ -8,7 +8,7 @@ import { retry, catchError } from 'rxjs/operators';
 })
 export class RestApiService {
 
-    apiURL = 'http://127.0.0.1:8000/';
+    apiURL = 'http://127.0.0.1:4000/';
     constructor(private http: HttpClient) {}
 
     /*========================================
@@ -23,7 +23,7 @@ export class RestApiService {
     } 
 
     getCategories(): Observable<any> {
-        return this.http.get<any>('api-v1/categories/')
+        return this.http.get<any>(this.apiURL+'api-v1/categories/')
         .pipe(
           retry(1),
           catchError(this.handleError) 
@@ -31,7 +31,7 @@ export class RestApiService {
     }
 
     getRetailers(): Observable<any> {
-        return this.http.get<any>('api-v1/retailers/')
+        return this.http.get<any>(this.apiURL+'api-v1/retailers/')
         .pipe(
           retry(1),
           catchError(this.handleError) 
@@ -39,7 +39,7 @@ export class RestApiService {
     } 
 
     getYears(): Observable<any> {
-        return this.http.get<any>('api-v1/years/')
+        return this.http.get<any>(this.apiURL+'api-v1/years/')
         .pipe(
           retry(1),
           catchError(this.handleError) 
@@ -47,15 +47,21 @@ export class RestApiService {
     }
 
     getRetailerRBData(category,year,aggregation,period): Observable<any> {
-        return this.http.get<any>('api-v1/retailerwise_rb_forecast/'+category+'/'+year+'/'+aggregation+'/'+period+'/')
+        return this.http.get<any>(this.apiURL+'api-v1/retailerwise_rb_forecast/'+category+'/'+year+'/'+aggregation+'/'+period+'/')
         .pipe(
           retry(1),
           catchError(this.handleError) 
         )
     }
-
+    getLastActualsYearMonth(category): Observable<any> {
+        return this.http.get<any>(this.apiURL+'api-v1/last_actuals_year_month/'+category+'/')
+        .pipe(
+          retry(1),
+          catchError(this.handleError) 
+        )
+    } 
     getCategoryGrowthData(category,year,aggregation,period): Observable<any> {
-        return this.http.get<any>('api-v1/category_forecast/'+category+'/'+year+'/'+aggregation+'/'+period+'/')
+        return this.http.get<any>(this.apiURL+'api-v1/category_forecast/'+category+'/'+year+'/'+aggregation+'/'+period+'/')
         .pipe(
           retry(1),
           catchError(this.handleError) 
@@ -63,7 +69,7 @@ export class RestApiService {
     }
 
     getSpecificRetailerRBData(category,year,aggregation,period,retailer): Observable<any> {
-        return this.http.get<any>('api-v1/specific_retailerwise_rb_forecast/'+category+'/'+year+'/'+aggregation+'/'+period+'/'+retailer+'/')
+        return this.http.get<any>(this.apiURL+'api-v1/specific_retailerwise_rb_forecast/'+category+'/'+year+'/'+aggregation+'/'+period+'/'+retailer+'/')
         .pipe(
           retry(1),
           catchError(this.handleError) 
@@ -71,36 +77,36 @@ export class RestApiService {
     }
     
     getAllSegmentRBData(category,year,aggregation,period,retailer): Observable<any> {
-        return this.http.get<any>('api-v1/all_segmentwise_rb_forecast/'+category+'/'+year+'/'+aggregation+'/'+period+'/'+retailer+'/')
+        return this.http.get<any>(this.apiURL+'api-v1/all_segmentwise_rb_forecast/'+category+'/'+year+'/'+aggregation+'/'+period+'/'+retailer+'/')
         .pipe(
           retry(1),
           catchError(this.handleError) 
         )
     }
     
-    mapImportedData(category): Observable<any> {
-        return this.http.get<any>('api-v1/mapdata/'+category+'/')
+    mapImportedData(category,datatype,userid): Observable<any> {
+        return this.http.get<any>(this.apiURL+'api-v1/mapdata/'+category+'/'+datatype+'/'+userid+'/')
         .pipe(
           retry(1),
           catchError(this.handleError) 
         )
     }
-    
-    analyseImportedData(category,year,month): Observable<any> {
-        return this.http.get<any>('api-v1/analysedata/'+category+'/'+year+'/'+month+'/')
+     
+    analyseImportedData(category,year,month,userid,count): Observable<any> {
+        return this.http.get<any>(this.apiURL+'api-v1/analysedata/'+category+'/'+year+'/'+month+'/'+userid+'/'+count+'/')
         .pipe(
           retry(1),
           catchError(this.handleError) 
         )
     }
 
-    buildSummaryData(category): Observable<any> {
-        return this.http.get<any>('api-v1/build-summary/'+category+'/')
+    buildSummaryData(category,year,month,datatype,userid): Observable<any> {
+        return this.http.get<any>(this.apiURL+'api-v1/build-summary/'+category+'/'+year+'/'+month+'/'+datatype+'/'+userid+'/')
         .pipe(
           retry(1),
           catchError(this.handleError) 
         )
-    }
+    } 
     
     // Error handling 
     handleError(error) {

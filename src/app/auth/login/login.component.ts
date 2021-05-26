@@ -29,8 +29,8 @@ export class LoginComponent implements OnInit {
     public ngZone: NgZone) {
 
     let user = JSON.parse(localStorage.getItem('user'));
-        console.log(user)
-        console.log('validate-token')
+        //console.log(user)
+        //console.log('validate-token')
     if(user !== null && user.hasOwnProperty('token') && user.token !== null && user.token != '') {
       this.loader = true;
       this.authService.ValidateToken()

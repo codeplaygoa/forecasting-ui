@@ -19,7 +19,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'forecasting/retailerwise',
+        path: 'forecasting/retailerwise/retailer/:retailerid',
         component: RetailerwiseComponent,
         data: {
           title: "Forecasting Retailerwise",

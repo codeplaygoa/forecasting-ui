@@ -1,0 +1,50 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6 col-xl-6">   
+            <div class="card">                              
+                <div class="card-header">
+                  <h5>Upload Weekly Data</h5>
+                </div>
+                <div class="card-body">
+                    <ng-template #popContent>                        
+                        <code>Mass Retailers, All Markets, Rb Category, Rb Manufacturer, Rb Brand, Rb Subbrand, Rb Target Age, Rb Subcategory, Rb Segment, Ur X Homeopathic, All Products, Weeks, All Periods, Dollar, Units, Tdp, Any Promo Dollar, No Promo Dollar, Disp Wo Feat Dollar, Feat Wo Disp Dollar, Feat And Disp Dollar, Price Decr Dollar, Any Promo Units, No Promo Units, Disp Wo Feat Units, Feat Wo Disp Units, Feat And Disp Units, Price Decr Units, Avg Unit Price, Base Unit Price, Any Promo Unit Price</code>                        
+                        <hr>
+                        <p class="text-danger"> Note: </p>
+                        <ul>
+                        
+                        <li> - File must be in csv format</li>
+                        <li> - Order of headers fields must be in the order mentioned above</li>
+                        </ul>
+                    </ng-template>
+                    <ng-template #popTitle>Import File Structure</ng-template>                    
+                    <div class="d-inline-block">
+                        <p>Please specify month and year of Actuals being uploaded</p>
+                        <div ngbDropdown class="float-left m-r-20 m-b-20" placement="bottom">
+                            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle >{{selectedYear}}</button>
+                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                              <button  *ngFor="let year of years; index as i; " class="dropdown-item" (click)="changeYear(year[0])">{{year[0]}}</button>
+                            </div>
+                        </div> 
+                        <div ngbDropdown class="float-left m-r-20" placement="bottom">
+                            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle >{{selectedMonth}}</button>
+                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                              <button  *ngFor="let month of months; index as i; " class="dropdown-item" (click)="changeMonth(month)">{{month}}</button>
+                            </div>
+                        </div> 
+                    </div>
+                    <dropzone class="dropzone" [config]="dropzoneconfig" [message]="'Click or drag files here to upload'" (sending)="onSending($event)" (init)="onUploadInit($event)" (error)="onUploadError($event)" (success)="onUploadSuccess($event)" (addedFile)="onAddedFile($event)" ></dropzone>
+                    <button type="button" class="btn btn-outline-primary btn-xs-eplisis m-t-20  m-b-20 m-r-20 " [ngbPopover]="popContent" [popoverTitle]="popTitle" placement="right" triggers="mouseenter:mouseleave">
+                Import File Structure
+                    </button>  
+                    <button class="btn btn-outline-primary btn-xs-eplisis m-t-20 m-b-20" (click)='resetDropzoneUploads()'>Reset uploads</button>
+                    
+                </div>
+            </div>            
+        </div>
+        <div class="col-sm-6 col-xl-6">
+            <h5>Upload Status</h5>
+            <ul class="status_items" #status>
+            </ul>
+        </div>    
+    </div>  
+</div> 

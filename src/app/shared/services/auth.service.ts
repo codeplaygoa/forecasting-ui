@@ -11,7 +11,7 @@ import { retry, catchError } from 'rxjs/operators';
 export class AuthService {
 
   public showLoader: boolean = false;  
-  public apiURL = 'http://127.0.0.1:8000/';
+  public apiURL = 'http://127.0.0.1:4000/';
   public userData = null
   constructor(
       public router: Router,
@@ -56,6 +56,7 @@ export class AuthService {
       lastName: user.lastName,
       token: user.token,
       uid: user.uid,
+      designation: user.designation,
       photoURL: user.photoURL || 'assets/dashboeard/boy-2.png',
     };
       this.userData = userData

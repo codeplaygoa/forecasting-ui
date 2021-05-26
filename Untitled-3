@@ -1,0 +1,23 @@
+rdi.mass_retailers, rdi.all_markets, rdi.rb_category, rdi.rb_manufacturer, rdi.rb_brand, rdi.rb_subbrand, rdi.rb_target_age, rdi.rb_subcategory, rdi.rb_segment, rdi.ur_x_homeopathic, rdi.all_products, rdi.weeks, rdi.all_periods, rdi.dollar, rdi.units, rdi.tdp, rdi.any_promo_dollar, rdi.no_promo_dollar, rdi.disp_wo_feat_dollar, rdi.feat_wo_disp_dollar, rdi.feat_and_disp_dollar, rdi.price_decr_dollar, rdi.any_promo_units, rdi.no_promo_units, rdi.disp_wo_feat_units, rdi.feat_wo_disp_units, rdi.feat_and_disp_units, rdi.price_decr_units, rdi.avg_unit_price, rdi.base_unit_price, rdi.any_promo_unit_price, rdi.month, rdi.year, rdi.week_no, rdi.quarter, rdi.segment, rdi.retailer, rdi.category
+
+
+RD.DOLLAR = RDI.DOLLAR,
+RD.UNITS = RDI.UNITS,
+RD.TDP = RDI.TDP,
+RD.ANY_PROMO_DOLLAR = RDI.ANY_PROMO_DOLLAR,
+RD.NO_PROMO_DOLLAR = RDI.NO_PROMO_DOLLAR,
+RD.DISP_WO_FEAT_DOLLAR = RDI.DISP_WO_FEAT_DOLLAR,
+RD.FEAT_WO_DISP_DOLLAR = RDI.FEAT_WO_DISP_DOLLAR,
+RD.FEAT_AND_DISP_DOLLAR = RDI.FEAT_AND_DISP_DOLLAR,
+RD.PRICE_DECR_DOLLAR = RDI.PRICE_DECR_DOLLAR,
+RD.ANY_PROMO_UNITS = RDI.ANY_PROMO_UNITS,
+RD.NO_PROMO_UNITS = RDI.NO_PROMO_UNITS,
+RD.DISP_WO_FEAT_UNITS = RDI.DISP_WO_FEAT_UNITS,
+RD.FEAT_WO_DISP_UNITS = RDI.FEAT_WO_DISP_UNITS,
+RD.FEAT_AND_DISP_UNITS = RDI.FEAT_AND_DISP_UNITS,
+RD.PRICE_DECR_UNITS = RDI.PRICE_DECR_UNITS,
+RD.AVG_UNIT_PRICE = RDI.AVG_UNIT_PRICE,
+RD.BASE_UNIT_PRICE = RDI.BASE_UNIT_PRICE,
+RD.ANY_PROMO_UNIT_PRICE = RDI.ANY_PROMO_UNIT_PRICE
+
+mass_retailers, all_markets, rb_category, rb_manufacturer, rb_brand, rb_subbrand, rb_target_age, rb_subcategory, rb_segment, ur_x_homeopathic, all_products, weeks, all_periods, dollar, units, tdp, any_promo_dollar, no_promo_dollar, disp_wo_feat_dollar, feat_wo_disp_dollar, feat_and_disp_dollar, price_decr_dollar, any_promo_units, no_promo_units, disp_wo_feat_units, feat_wo_disp_units, feat_and_disp_units, price_decr_units, avg_unit_price, base_unit_price, any_promo_unit_price, month, year, week_no, quarter, segment, retailer, category

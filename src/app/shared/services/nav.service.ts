@@ -45,12 +45,14 @@ export class NavService {
 				{ path: '', title: 'Simulations', type: 'link' },
 				{ path: '', title: 'Actualization', type: 'link' }
 			]
-		}, 
-        
-        {
-			path: '/input-data/weekly-data', title: 'Input Weekly Data', icon: 'edit-3', type: 'link'
 		},
-		{
+        {
+			title: 'Input Data', icon: 'edit-3', type: 'sub', active: true, children: [
+				{ path: '/input-data/actuals-weekly-data', title: 'Actuals Weekly Data', type: 'link' },
+				{ path: '/input-data/forecast-weekly-data', title: 'Forecast Weekly Data', type: 'link' }
+			]
+		},          
+        {
 			path: '/faq', title: 'FAQ', icon: 'help-circle', type: 'link'
 		},
 		{

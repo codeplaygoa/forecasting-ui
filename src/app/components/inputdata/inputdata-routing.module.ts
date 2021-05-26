@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AssumptionDataComponent } from './assumption-data/assumption-data.component';
-import { WeeklyDataComponent } from './weekly-data/weekly-data.component';
+import { ActualsWeeklyDataComponent } from './actuals-weekly-data/actuals-weekly-data.component';
+import { ForecastWeeklyDataComponent } from './forecast-weekly-data/forecast-weekly-data.component';
 
 const routes: Routes = [
     {
@@ -16,13 +17,21 @@ const routes: Routes = [
         }
       },
       {
-        path: 'weekly-data',
-        component: WeeklyDataComponent,
+        path: 'actuals-weekly-data',
+        component: ActualsWeeklyDataComponent,
         data: {
-          title: "Weekly Data",
-          breadcrumb: "Weekly Data"
+          title: "Actuals Weekly Data",
+          breadcrumb: "Actuals Weekly Data"
         }
-      },    
+      },
+      {
+        path: 'forecast-weekly-data',
+        component: ForecastWeeklyDataComponent,
+        data: {
+          title: "Forecast Weekly Data",
+          breadcrumb: "Forecast Weekly Data"
+        }
+      }    
       
     ]
   }

@@ -2,7 +2,7 @@
 <div class="container-fluid">  
     
     <h6>
-        <ng-template #content let-modal>
+        <!--ng-template #content let-modal>
             <div class="modal-header">
               <h4 class="modal-title" id="modal-basic-title">URT Category Growth and RB Share</h4>
               <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -39,16 +39,19 @@
                 </div>
             </div> 
             </div>
-          </ng-template>
-        <button class="float-right btn btn-outline-primary info-btn" (click)="openGraph(content)">
+          </ng-template-->
+        <!--button class="float-right btn btn-outline-primary info-btn" (click)="openGraph(content)">
             <i data-feather="pie-chart" ></i>
         </button>   
         <button type="button" class="float-right btn btn-outline-primary btn-xs-eplisis info-btn" [ngbPopover]="popContent" [popoverTitle]="popTitle" placement="left" triggers="mouseenter:mouseleave">
             <i data-feather="info" ></i>
-        </button> 
-        URT Category Growth and RB Share
+        </button--> 
+        {{currentCategory.categoryname}} Category Growth and RB Share
+        <button class="float-right btn info-btn" (click)="downloadCsv()">
+            Download Report
+        </button>
     </h6>
-    <ng-template #popContent>                          
+    <!--ng-template #popContent>                          
           <p class="text-danger"> Note: </p>
           <ul>
             <li> - Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
@@ -59,7 +62,7 @@
             <li> - Nulla dapibus magna vel pulvinar tempus.</li>
           </ul>
     </ng-template>
-    <ng-template #popTitle>URT Category Growth and RB Share</ng-template>      
+    <ng-template #popTitle>URT Category Growth and RB Share</ng-template-->      
     <hr/>
     <div class="row">
         <div class="col-sm-6 col-xl-6"> 
@@ -105,12 +108,12 @@
         
     </div>
     <h6 class="m-t-20">
-        <button type="button" class="float-right btn btn-outline-primary btn-xs-eplisis info-btn" [ngbPopover]="popContent" [popoverTitle]="popTitle" placement="left" triggers="mouseenter:mouseleave">
+        <!--button type="button" class="float-right btn btn-outline-primary btn-xs-eplisis info-btn" [ngbPopover]="popContent" [popoverTitle]="popTitle" placement="left" triggers="mouseenter:mouseleave">
             <i data-feather="info" ></i>
-        </button> 
-        XAOC URT Total RB and Segments
+        </button--> 
+        XAOC {{currentCategory.categoryname}} Total RB and Segments
     </h6>
-    <ng-template #popContent>                          
+    <!--ng-template #popContent>                          
           <p class="text-danger"> Note: </p>
           <ul>
             <li> - Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
@@ -121,7 +124,7 @@
             <li> - Nulla dapibus magna vel pulvinar tempus.</li>
           </ul>
     </ng-template>
-    <ng-template #popTitle>XAOC URT Total RB</ng-template>      
+    <ng-template #popTitle>XAOC URT Total RB</ng-template-->      
     <hr/>
     <div class="row">
         <div class="col-sm-5 col-xl-5"> 
@@ -162,12 +165,12 @@
         </div> 
     </div> 
     <h6>
-        <button type="button" class="float-right btn btn-outline-primary btn-xs-eplisis info-btn" [ngbPopover]="popContent1" [popoverTitle]="popTitle1" placement="left" triggers="mouseenter:mouseleave">
+        <!--button type="button" class="float-right btn btn-outline-primary btn-xs-eplisis info-btn" [ngbPopover]="popContent1" [popoverTitle]="popTitle1" placement="left" triggers="mouseenter:mouseleave">
             <i data-feather="info" ></i>
-        </button> 
-        Retailer Forecast: RB URT
+        </button--> 
+        Retailer Forecast: RB {{currentCategory.categoryname}}
     </h6>
-    <ng-template #popContent1>                          
+    <!--ng-template #popContent1>                          
           <p class="text-danger"> Note: </p>
           <ul>
             <li> - Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
@@ -178,7 +181,7 @@
             <li> - Nulla dapibus magna vel pulvinar tempus.</li>
           </ul>
       </ng-template>
-      <ng-template #popTitle1>Retailer Forecast: RB URT</ng-template>
+      <ng-template #popTitle1>Retailer Forecast: RB URT</ng-template-->
       
     <hr/>
     <div class="row">
@@ -215,7 +218,7 @@
                 <figcaption>Data for {{nextYear}} vs {{previousYear}}.</figcaption>
                 <ngx-datatable class="material fullscreen"  [headerHeight]="30" [columnMode]="'force'" 
                 [footerHeight]="0" [rowHeight]="20" [swapColumns]="false" [scrollbarV]="false" [virtualization]="false" [scrollbarH]="false" [rows]="retailerContributionsCompare">
-                    <ngx-datatable-column name="SEGMENTS" prop="retailer_name" [cellClass]="bgsuccess"></ngx-datatable-column>                        
+                    <ngx-datatable-column name="RETAILERS" prop="retailer_name" [cellClass]="bgsuccess"></ngx-datatable-column>                        
                     <ngx-datatable-column name="FY {{nextYear}} vs {{previousYear}}" prop="fy" [cellClass]="bgwarning" ></ngx-datatable-column>
                 </ngx-datatable>
             </figure>

@@ -36,7 +36,7 @@
         </div>
       </div>      
       <div ngbDropdown class="d-inline-block float-right m-r-20" placement="bottom">
-        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle >{{selectedRetailer}}</button>
+        <button class="btn btn-outline-primary" id="retailerDropDown" ngbDropdownToggle >{{selectedRetailer}}</button>
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
           <button  *ngFor="let retailer of retailers; index as i; " class="dropdown-item" (click)="changeRetailer(retailer.retailer_id,retailer.retailer_name)">{{retailer.retailer_name}}</button>
         </div>

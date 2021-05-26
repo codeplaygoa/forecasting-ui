@@ -26,6 +26,7 @@ export class BreadcrumbComponent implements OnInit {
   public selectedAggregation: string;
   public selectedAggregationValue: string;
   public selectedCategory: string;
+  public selectedCategoryName: string;
   public categoryservice;
 
   constructor(private changeDetectorRef: ChangeDetectorRef,
@@ -56,19 +57,19 @@ export class BreadcrumbComponent implements OnInit {
         }
       });
       
-      
-      
      
   }
   
   
   public changeYear(selectedYear){
+      
       this.selectedYear = selectedYear
       const currentItem:CategoryPPG = {
          category:this.selectedCategory,
+         categoryname:this.selectedCategoryName,
          year:this.selectedYear,
          aggregation:this.selectedAggregationValue,
-         retailer:Number(this.selectedRetailerValue)
+         /*retailer:Number(this.selectedRetailerValue)*/
       };
 
       this.categoryService.updateItem(currentItem);
@@ -76,6 +77,7 @@ export class BreadcrumbComponent implements OnInit {
   }
 
   public changeAggregate(selectedAggregation){
+      
       if(selectedAggregation == 'percent_change'){
          this.selectedAggregationValue = 'percent_change'  
          this.selectedAggregation = '% Change'
@@ -86,27 +88,29 @@ export class BreadcrumbComponent implements OnInit {
       }
       const currentItem:CategoryPPG = {
          category:this.selectedCategory,
+          categoryname:this.selectedCategoryName,
          year:this.selectedYear,
          aggregation:this.selectedAggregationValue,
-         retailer:Number(this.selectedRetailerValue)
+         /*retailer:Number(this.selectedRetailerValue)*/
       };
 
       this.categoryService.updateItem(currentItem);
 
   }    
   public changeRetailer(selectedRetailerId,selectedRetailerName){
-      this.selectedRetailerValue = selectedRetailerId
       this.selectedRetailer = selectedRetailerName
+      /*this.selectedRetailerValue = selectedRetailerId
       const currentItem:CategoryPPG = {
          category:this.selectedCategory,
+         categoryname:this.selectedCategoryName,
          year:this.selectedYear,
          aggregation:this.selectedAggregationValue,
          retailer:Number(this.selectedRetailerValue)
       };
 
-      this.categoryService.updateItem(currentItem);
+      this.categoryService.updateItem(currentItem);*/
       this.changeDetectorRef.detectChanges();
-      this.router.navigate(['/analysis/forecasting/retailerwise',{retailerid:selectedRetailerId,retailername:selectedRetailerName}]);
+      this.router.navigate(['/analysis/forecasting/retailerwise/retailer',selectedRetailerId]);
   }
 
   ngOnInit() { 
@@ -115,8 +119,8 @@ export class BreadcrumbComponent implements OnInit {
       
       this.restApi.getRetailers().subscribe((retailers: {}) => {
           this.retailers = retailers
-          this.selectedRetailer = 'Select Retailer'
-          this.selectedRetailerValue = null
+          /*this.selectedRetailer = 'Select Retailer'
+          this.selectedRetailerValue = null*/
           this.restApi.getYears().subscribe((years: {}) => {
               this.years = years
               this.selectedYear = years[0][0]
@@ -124,15 +128,18 @@ export class BreadcrumbComponent implements OnInit {
               this.categoryservice = this.categoryService.getCategoryObject()
       
               this.selectedCategory = this.categoryservice.category
+              this.selectedCategoryName = this.categoryservice.categoryname
               this.selectedAggregationValue = this.categoryservice.aggregation
               //this.selectedYear = this.categoryservice.year
               //this.selectedRetailer = this.categoryservice.retailer
               //console.log(this.selectedCategory+" - "+this.selectedYear+" - "+this.selectedRetailer)
+              
               const currentItem:CategoryPPG = {
                  category:this.selectedCategory,
+                 categoryname:this.selectedCategoryName,
                  year:this.selectedYear,
                  aggregation:'percent_change',
-                 retailer:Number(this.selectedRetailerValue)
+                 /*retailer:Number(this.selectedRetailerValue)*/
               };
 
               this.categoryService.updateItem(currentItem);
@@ -144,7 +151,7 @@ export class BreadcrumbComponent implements OnInit {
           })
       })
       
-       
+       this.selectedRetailer = 'Select Retailer'
       
       
   }
@@ -156,8 +163,9 @@ export class BreadcrumbComponent implements OnInit {
             this.selectedCategory = currentCategory.category
             this.selectedAggregationValue = currentCategory.aggregation
             this.selectedYear = currentCategory.year
-            var retailerName = this.retailers.find(x=> Number(x.retailer_id) == Number(currentCategory.retailer))           
-            this.selectedRetailer = (retailerName !== undefined) ? retailerName.retailer_name : 'Select Retailer'
+            //var retailerName = this.retailers.find(x=> Number(x.retailer_id) == Number(currentCategory.retailer))           
+            //this.selectedRetailer = (retailerName !== undefined) ? retailerName.retailer_name : 'Select Retailer'
+            //this.selectedRetailer = 'Select Retailer'
         }
       });
   }

@@ -1,12 +1,15 @@
 <!-- Container-fluid starts -->
 <div class="container-fluid">  
     <h6 class="m-t-20">
-        <button type="button" class="float-right btn btn-outline-primary btn-xs-eplisis info-btn" [ngbPopover]="popContent" [popoverTitle]="popTitle" placement="left" triggers="mouseenter:mouseleave">
+        <!--button type="button" class="float-right btn btn-outline-primary btn-xs-eplisis info-btn" [ngbPopover]="popContent" [popoverTitle]="popTitle" placement="left" triggers="mouseenter:mouseleave">
             <i data-feather="info" ></i>
-        </button> 
-        {{retailerName}} URT Total RB and Segments Quarterwise
+        </button--> 
+        {{retailerName}} {{currentCategory.categoryname}} Total RB and Segments Quarterwise
+        <button class="float-right btn info-btn" (click)="downloadCsv()">
+            Download Report
+        </button>
     </h6>
-    <ng-template #popContent>                          
+    <!--ng-template #popContent>                          
           <p class="text-danger"> Note: </p>
           <ul>
             <li> - Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
@@ -17,7 +20,7 @@
             <li> - Nulla dapibus magna vel pulvinar tempus.</li>
           </ul>
     </ng-template>
-    <ng-template #popTitle> {{retailerName}} URT Total RB and Segments Quarterwise</ng-template>      
+    <ng-template #popTitle> {{retailerName}} {{currentCategory.categoryname}} Total RB and Segments Quarterwise</ng-template-->      
     <hr/>
     <div class="row">
         <div class="col-sm-6 col-xl-6"> 
@@ -48,12 +51,12 @@
         </div> 
     </div> 
     <h6 class="m-t-20">
-        <button type="button" class="float-right btn btn-outline-primary btn-xs-eplisis info-btn" [ngbPopover]="popContent" [popoverTitle]="popTitle" placement="left" triggers="mouseenter:mouseleave">
+        <!--button type="button" class="float-right btn btn-outline-primary btn-xs-eplisis info-btn" [ngbPopover]="popContent" [popoverTitle]="popTitle" placement="left" triggers="mouseenter:mouseleave">
             <i data-feather="info" ></i>
-        </button> 
-        {{retailerName}} URT Total RB and Segments Monthwise
+        </button--> 
+        {{retailerName}} {{currentCategory.categoryname}} Total RB and Segments Monthwise
     </h6>
-    <ng-template #popContent>                          
+    <!--ng-template #popContent>                          
           <p class="text-danger"> Note: </p>
           <ul>
             <li> - Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
@@ -64,9 +67,9 @@
             <li> - Nulla dapibus magna vel pulvinar tempus.</li>
           </ul>
     </ng-template>
-    <ng-template #popTitle> {{retailerName}} URT Total RB and Segments Monthwise</ng-template>      
+    <ng-template #popTitle> {{retailerName}} {{currentCategory.categoryname}} Total RB and Segments Monthwise</ng-template-->      
     <hr/>
-    <div class="row">
+    <div class="row" >
         <div class="col-sm-12 col-xl-12"> 
             <figure>
                 <figcaption>Data for {{nextYear}}.</figcaption>

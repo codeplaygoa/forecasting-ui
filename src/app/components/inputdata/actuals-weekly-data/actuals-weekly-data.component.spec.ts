@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WeeklyDataComponent } from './weekly-data.component';
+import { ActualsWeeklyDataComponent } from './actuals-weekly-data.component';
 
-describe('WeeklyDataComponent', () => {
-  let component: WeeklyDataComponent;
-  let fixture: ComponentFixture<WeeklyDataComponent>;
+describe('ActualsWeeklyDataComponent', () => {
+  let component: ActualsWeeklyDataComponent;
+  let fixture: ComponentFixture<ActualsWeeklyDataComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WeeklyDataComponent ]
+      declarations: [ ActualsWeeklyDataComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WeeklyDataComponent);
+    fixture = TestBed.createComponent(ActualsWeeklyDataComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
